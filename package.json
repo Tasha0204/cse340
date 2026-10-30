@@ -1,0 +1,19 @@
+{
+  "name": "mi-curso-node",
+  "version": "1.0.0",
+  "description": "Actividad W01: Node.js",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^7.0.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
