@@ -148,7 +148,30 @@ VALUES
 'Downtown Avenue',
 '2026-06-05');
 
+-- ========================================
+-- update on the dates for upcoming service projects
+-- ========================================
 
+UPDATE public.service_project
+SET date = CASE project_id
+    -- BrightFuture Builders
+    WHEN 1 THEN '2026-11-12'::DATE
+    WHEN 2 THEN '2026-11-15'::DATE
+
+    -- GreenHarvest Growers
+    WHEN 6 THEN '2026-11-13'::DATE
+    WHEN 7 THEN '2026-11-16'::DATE
+
+    -- UnityServe Volunteers
+    WHEN 11 THEN '2026-11-14'::DATE
+
+    -- Restore original dates of other projects
+    WHEN 12 THEN '2026-04-22'::DATE
+    WHEN 13 THEN '2026-05-08'::DATE
+    WHEN 14 THEN '2026-05-20'::DATE
+    WHEN 15 THEN '2026-06-05'::DATE
+END
+WHERE project_id IN (1, 2, 6, 7, 11, 12, 13, 14, 15);
 
 
 
