@@ -1,7 +1,7 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import {testConnection} from './src/models/db.js';
+import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
 import { getAllCategories } from './src/models/categories.js';
@@ -25,6 +25,18 @@ app.set('view engine', 'ejs');
 
 
 app.set('views', path.join(__dirname, 'src/views'));
+app.use((req, res, next) => {
+    if (NODE_ENV === 'development') {
+        console.log(`${req.method} ${req.url}`);
+    }
+    next();
+});
+app.use((req, res, next) => {
+    res.locals.NODE_ENV = NODE_ENV;
+    next();
+});
+
+
 
 /**
  * Routes
@@ -37,7 +49,7 @@ app.get('/', async (req, res) => {
 app.get('/organizations', async (req, res) => {
 
     try {
-    
+
         const organizations = await getAllOrganizations();
         const title = 'Our Partner Organizations';
 
@@ -51,7 +63,7 @@ app.get('/organizations', async (req, res) => {
 app.get('/projects', async (req, res) => {
     const projects = await getAllProjects();
     const title = 'Service Projects';
-    
+
     res.render('projects', { title, projects });
 });
 
@@ -61,14 +73,14 @@ app.get('/categories', async (req, res) => {
 
     res.render('categories', { title, categories });
 });
-app.listen(PORT,async () => {
-    try{
-       await testConnection();
-       console.log(`Server is running at http://127.0.0.1:${PORT}`);
-       console.log(`Environment: ${NODE_ENV}`);
+app.listen(PORT, async () => {
+    try {
+        await testConnection();
+        console.log(`Server is running at http://127.0.0.1:${PORT}`);
+        console.log(`Environment: ${NODE_ENV}`);
     }
-   catch(error){
-    console.error('Failed to connect to the database:', error);
-    process.exit(1);
-   }
+    catch (error) {
+        console.error('Failed to connect to the database:', error);
+        process.exit(1);
+    }
 });
