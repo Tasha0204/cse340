@@ -4,7 +4,7 @@
         <h1>
             <%= title %>
         </h1>
-           
+
         <h2>
             <%= projectDetails.title %>
         </h2>
@@ -33,15 +33,19 @@
             <strong>Categories:</strong>
         </p>
 
-         <ul>
+        <ul>
             <% categories.forEach(category => { %>
-        <li>
-            <a href="/category/<%= category.category_id %>">
-            <%= category.name %>
-            </a>
-        </li>
+                <li>
+                    <a href="/category/<%= category.category_id %>">
+                        <%= category.name %>
+                    </a>
+                </li>
             <% }) %>
         </ul>
+
+        <p>
+            <a href="/assign-categories/<%= projectDetails.project_id %>">Edit Categories</a>
+        </p>
     </main>
 
     <%- include('partials/footer') %>
