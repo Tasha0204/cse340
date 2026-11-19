@@ -1,5 +1,5 @@
 import { body, validationResult } from 'express-validator';
-import { getUpcomingProjects, getProjectDetails, createProject,updateProject } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 
@@ -90,7 +90,6 @@ const showEditProjectForm = async (req, res) => {
         return res.redirect('/projects');
     }
 
-    // Formato YYYY-MM-DD para el campo de fecha
     const d = new Date(projectDetails.date);
     const formattedDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
@@ -120,4 +119,4 @@ const processEditProjectForm = async (req, res) => {
         res.redirect(`/edit-project/${projectId}`);
     }
 };
-export {showProjectsPage,showProjectDetailsPage,showNewProjectForm,processNewProjectForm,projectValidation,showEditProjectForm,processEditProjectForm};
+export { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, projectValidation, showEditProjectForm, processEditProjectForm };
