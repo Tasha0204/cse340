@@ -154,18 +154,14 @@ VALUES
 
 UPDATE public.service_project
 SET date = CASE project_id
-    -- BrightFuture Builders
-    WHEN 1 THEN '2026-11-12'::DATE
-    WHEN 2 THEN '2026-11-15'::DATE
-
-    -- GreenHarvest Growers
-    WHEN 6 THEN '2026-11-13'::DATE
-    WHEN 7 THEN '2026-11-16'::DATE
-
-    -- UnityServe Volunteers
-    WHEN 11 THEN '2026-11-14'::DATE
+    -- Upcoming projects (December 2026)
+    WHEN 1 THEN '2026-12-12'::DATE
+    WHEN 6 THEN '2026-12-13'::DATE
+    WHEN 11 THEN '2026-12-14'::DATE
 
     -- Restore original dates of other projects
+    WHEN 2 THEN '2026-04-18'::DATE
+    WHEN 7 THEN '2026-04-20'::DATE
     WHEN 12 THEN '2026-04-22'::DATE
     WHEN 13 THEN '2026-05-08'::DATE
     WHEN 14 THEN '2026-05-20'::DATE
@@ -229,14 +225,20 @@ INSERT INTO public.service_project_category (project_id, category_id)
 (14, 3),
 (15, 2);
 
+-- ========================================
+-- Roles and Users tables 
+-- ========================================
+
 CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
     role_name VARCHAR(50) UNIQUE NOT NULL,
     role_description TEXT
 );
+
 INSERT INTO roles (role_name, role_description) VALUES
     ('user', 'Standard user with basic access'),
     ('admin', 'Administrator with full system access');
+
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
